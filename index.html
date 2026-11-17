@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff7fa8">
+<meta name="description" content="A little romantic surprise made with love.">
+<title>KYZ LOVE — A Little Surprise</title>
+<style>
+  :root {
+    --pink: #ff6f9f;
+    --deep: #d94d83;
+    --pale: #fff0f5;
+    --ink: #553447;
+    --card: rgba(255,255,255,.88);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    font-family: system-ui, "Noto Sans Myanmar", sans-serif;
+    background: linear-gradient(145deg, #ffe2ec, #f5e7ff 55%, #fff0e6);
+    overflow-x: hidden;
+  }
+  .hearts { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .heart {
+    position: absolute; bottom: -40px; opacity: .28;
+    animation: floatUp linear infinite; color: #ef6f9d;
+  }
+  @keyframes floatUp {
+    from { transform: translateY(0) rotate(0deg); opacity: 0; }
+    15% { opacity: .3; }
+    to { transform: translateY(-115vh) rotate(35deg); opacity: 0; }
+  }
+  .wrap { position: relative; z-index: 1; width: min(680px, 100%); margin: auto; padding: 26px 16px 42px; }
+  .brand { text-align: center; font-weight: 800; letter-spacing: 3px; color: var(--deep); font-size: 13px; }
+  .hero, .panel {
+    background: var(--card); border: 1px solid rgba(255,255,255,.9);
+    border-radius: 25px; box-shadow: 0 14px 40px rgba(176,93,132,.14);
+    padding: 25px 20px; margin-top: 18px; text-align: center;
+    backdrop-filter: blur(8px);
+  }
+  .big-heart { font-size: 55px; line-height: 1.2; }
+  h1 { font-size: clamp(25px, 6vw, 36px); margin: 12px 0 8px; color: #c94f80; }
+  h2 { font-size: 22px; margin: 4px 0 12px; color: #c94f80; }
+  p { line-height: 1.9; margin: 10px 0; }
+  .sub { color: #896879; font-size: 14px; }
+  .nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 16px 0; }
+  button {
+    border: 0; border-radius: 15px; padding: 13px 12px; cursor: pointer;
+    font: inherit; font-weight: 700; transition: transform .15s, filter .15s;
+  }
+  button:active { transform: scale(.97); }
+  .nav button { background: #fff; color: #b64d78; box-shadow: 0 5px 14px #d99ab322; font-size: 13px; }
+  .nav button.active { color: white; background: linear-gradient(135deg, #ff8eb1, #d95b91); }
+  .primary { color: white; background: linear-gradient(135deg, #ff8eb1, #d95b91); box-shadow: 0 7px 18px #d95b9133; }
+  .soft { color: #b64d78; background: #ffe5ef; }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+  .actions button { min-width: 130px; }
+  .page { display: none; }
+  .page.show { display: block; animation: appear .25s ease; }
+  @keyframes appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+  .answer { min-height: 34px; margin-top: 14px; color: #bd4778; font-weight: 700; }
+  .letter {
+    text-align: left; background: #fff7fa; border: 1px dashed #f3a6c2;
+    border-radius: 18px; padding: 18px; line-height: 2;
+  }
+  .tiny { font-size: 12px; color: #9b7b8b; margin-top: 22px; text-align: center; }
+  .editbox { margin-top: 18px; text-align: left; background: #fff8fb; border-radius: 16px; padding: 14px; }
+  .editbox label { display: block; font-size: 13px; color: #93677b; margin: 8px 0 4px; }
+  .editbox input, .editbox textarea {
+    width: 100%; border: 1px solid #f0c4d5; border-radius: 11px; padding: 11px;
+    font: inherit; color: var(--ink); background: white;
+  }
+  .editbox textarea { min-height: 82px; resize: vertical; }
+  .footer { text-align: center; color: #a17d8e; font-size: 12px; margin-top: 20px; }
+  @media (max-width: 380px) { .nav { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+<main class="wrap">
+  <div class="brand">KYZ LOVE ✦ LITTLE SURPRISE</div>
+
+  <section class="hero">
+    <div class="big-heart">💗</div>
+    <h1 id="heroTitle">မင်းအတွက် Surprise လေး</h1>
+    <p id="heroText">ပြောချင်တဲ့ စကားလေးတွေ ရှိလို့ပါ။ အချိန်ခဏလေးပေးပြီး ဖွင့်ကြည့်ပေးနော်။</p>
+    <p class="sub">A little message, made just for you ♡</p>
+    <button class="primary" onclick="showPage('crush')">ဖွင့်ကြည့်မယ် 💌</button>
+  </section>
+
+  <nav class="nav" aria-label="Surprise sections">
+    <button id="tab-crush" class="active" onclick="showPage('crush')">💗 Crush</button>
+    <button id="tab-love" onclick="showPage('love')">💞 Be My Love</button>
+    <button id="tab-letter" onclick="showPage('letter')">💌 Love Letter</button>
+  </nav>
+
+  <section id="page-crush" class="panel page show">
+    <div class="big-heart">🥰</div>
+    <h2>မင်းကို မေးချင်တာလေးရှိတယ်</h2>
+    <p>မင်းနဲ့ စကားပြောရတဲ့အချိန်တွေက ကိုယ့်အတွက် ပျော်စရာလေးတွေပါ။</p>
+    <p><strong>မင်းလည်း ကိုယ့်ကို ပိုပြီး သိကျွမ်းချင်လား။</strong></p>
+    <div class="actions">
+      <button class="primary" onclick="reply('crush','ဟုတ်တယ် 💗')">ဟုတ်တယ် 💗</button>
+      <button class="soft" onclick="reply('crush','အချိန်ယူချင်တယ် 😊')">အချိန်ယူချင်တယ် 😊</button>
+    </div>
+    <div id="crush-answer" class="answer" aria-live="polite"></div>
+  </section>
+
+  <section id="page-love" class="panel page">
+    <div class="big-heart">💝</div>
+    <h2>တစ်ခုလောက် မေးပါရစေ</h2>
+    <p>အဆင်ပြေတယ်ဆိုရင် တစ်ယောက်ကိုတစ်ယောက် ပိုပြီး နားလည်သိကျွမ်းရင်း ရှေ့ဆက်ကြည့်မလား။</p>
+    <div class="actions">
+      <button class="primary" onclick="reply('love','အဖြေက Yes ဆိုတာ ဝမ်းသာပါတယ် 💞')">Yes 💞</button>
+      <button class="soft" onclick="reply('love','ရပါတယ်။ မင်းအဆင်ပြေတဲ့အချိန်မှ ပြောလို့ရပါတယ် 🌷')">နောက်မှပြောမယ် 🌷</button>
+    </div>
+    <div id="love-answer" class="answer" aria-live="polite"></div>
+  </section>
+
+  <section id="page-letter" class="panel page">
+    <div class="big-heart">💌</div>
+    <h2>မင်းကို ပြောချင်တဲ့ စကားလေး</h2>
+    <div class="letter" id="letterText">
+      မင်းရေ…<br><br>
+      မင်းကို သိခွင့်ရတာ ကိုယ့်အတွက် ဝမ်းသာစရာပါ။ မင်းရဲ့ အပြုံးလေးနဲ့ စကားလေးတွေက တစ်နေ့တာကို ပိုလှပစေတယ်။<br><br>
+      မင်းကို အလျင်လိုပြီး အဖြေတောင်းတာ မဟုတ်ပါဘူး။ ကိုယ့်ခံစားချက်လေးကို ရိုးရိုးသားသား ပြောပြချင်တာပါ။ မင်းရဲ့ ဆုံးဖြတ်ချက်ကိုလည်း လေးစားပါတယ်။<br><br>
+      ခင်မင်လေးစားစွာဖြင့်… ❤️
+    </div>
+    <div class="actions">
+      <button class="primary" onclick="showPage('crush')">အစကနေ ပြန်ကြည့်မယ်</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>ကိုယ့်စာလေးကို ပြင်ချင်လား။</h2>
+    <p class="sub">အောက်က အချက်တွေကို ပြင်ပြီး “စာသားပြောင်းမယ်” ကိုနှိပ်ပါ။ ဒီပြင်ဆင်မှုက ဒီဖုန်း/ဒီ browser မှာပဲ ပြောင်းလဲပါမယ်။ လူတိုင်းမြင်ရမယ့် မူရင်းစာသားပြောင်းဖို့ HTML ဖိုင်ထဲမှာ ပြင်ပြီး ပြန်တင်ရပါမယ်။</p>
+    <div class="editbox">
+      <label for="toName">လက်ခံမယ့်သူရဲ့ နာမည်</label>
+      <input id="toName" placeholder="ဥပမာ - ရွှန်းလဲ့">
+      <label for="fromName">ပို့မယ့်သူရဲ့ နာမည်</label>
+      <input id="fromName" placeholder="ဥပမာ - ရာဇာ">
+      <label for="customLetter">ကိုယ်ရေးချင်တဲ့ စာ</label>
+      <textarea id="customLetter" placeholder="ကိုယ်ပြောချင်တဲ့ စကားလေး ရေးပါ..."></textarea>
+      <div class="actions">
+        <button class="primary" onclick="applyEdits()">စာသားပြောင်းမယ် ✨</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>ဒီ Surprise လေးကို မျှဝေမယ်</h2>
+    <p class="sub">Website ကို အင်တာနက်ပေါ် တင်ပြီးတဲ့အခါမှ ဒီခလုတ်နဲ့ တကယ့် link ကို မျှဝေနိုင်ပါတယ်။</p>
+    <div class="actions">
+      <button class="primary" onclick="shareTelegram()">Telegram မှာ ပို့မယ် 📲</button>
+      <button class="soft" onclick="copyLink()">Link ကူးမယ် 🔗</button>
+    </div>
+    <div id="share-answer" class="answer" aria-live="polite"></div>
+  </section>
+
+  <div class="footer">Made with care · KYZ LOVE ♡</div>
+</main>
+
+<script>
+  const defaultLetter = document.getElementById('letterText').innerHTML;
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('show');
+    document.getElementById('tab-' + name).classList.add('active');
+    document.getElementById('page-' + name).scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function reply(which, message) {
+    document.getElementById(which + '-answer').textContent = message;
+  }
+  let customShareUrl = location.href;
+  function applyEdits() {
+    const to = document.getElementById('toName').value.trim();
+    const from = document.getElementById('fromName').value.trim();
+    const custom = document.getElementById('customLetter').value.trim();
+    document.getElementById('heroTitle').textContent = to ? to + ' အတွက် Surprise လေး 💗' : 'မင်းအတွက် Surprise လေး';
+    document.getElementById('letterText').textContent =
+      (to ? to + ' ရေ…\n\n' : 'မင်းရေ…\n\n') +
+      (custom || 'မင်းကို သိခွင့်ရတာ ကိုယ့်အတွက် ဝမ်းသာစရာပါ။ မင်းရဲ့ အပြုံးလေးနဲ့ စကားလေးတွေက တစ်နေ့တာကို ပိုလှပစေတယ်။ မင်းကို အလျင်လိုပြီး အဖြေတောင်းတာ မဟုတ်ပါဘူး။ ကိုယ့်ခံစားချက်လေးကို ရိုးရိုးသားသား ပြောပြချင်တာပါ။ မင်းရဲ့ ဆုံးဖြတ်ချက်ကိုလည်း လေးစားပါတယ်။') +
+      '\n\n' + (from ? 'ခင်မင်လေးစားစွာဖြင့်၊ ' + from + ' ❤️' : 'ခင်မင်လေးစားစွာဖြင့်… ❤️');
+    const shareUrl = new URL(location.href);
+    shareUrl.searchParams.set('to', to);
+    shareUrl.searchParams.set('from', from);
+    shareUrl.searchParams.set('letter', custom);
+    customShareUrl = shareUrl.toString();
+    document.getElementById('share-answer').textContent = 'စာသားပြင်ပြီးပါပြီ။ အောက်က Telegram ခလုတ်ကိုနှိပ်ပြီး ဒီစာသားပါဝင်တဲ့ link ကို ပို့နိုင်ပါပြီ 💗';
+  }
+  function loadSharedMessage() {
+    const params = new URLSearchParams(location.search);
+    const to = params.get('to') || '';
+    const from = params.get('from') || '';
+    const custom = params.get('letter') || '';
+    if (!to && !from && !custom) return;
+    document.getElementById('toName').value = to;
+    document.getElementById('fromName').value = from;
+    document.getElementById('customLetter').value = custom;
+    document.getElementById('heroTitle').textContent = to ? to + ' အတွက် Surprise လေး 💗' : 'မင်းအတွက် Surprise လေး';
+    document.getElementById('letterText').textContent =
+      (to ? to + ' ရေ…\n\n' : 'မင်းရေ…\n\n') +
+      (custom || 'မင်းကို သိခွင့်ရတာ ကိုယ့်အတွက် ဝမ်းသာစရာပါ။ မင်းရဲ့ အပြုံးလေးနဲ့ စကားလေးတွေက တစ်နေ့တာကို ပိုလှပစေတယ်။ မင်းရဲ့ ဆုံးဖြတ်ချက်ကိုလည်း လေးစားပါတယ်။') +
+      '\n\n' + (from ? 'ခင်မင်လေးစားစွာဖြင့်၊ ' + from + ' ❤️' : 'ခင်မင်လေးစားစွာဖြင့်… ❤️');
+    customShareUrl = location.href;
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function shareTelegram() {
+    if (location.protocol === 'file:') {
+      document.getElementById('share-answer').textContent = 'အရင်ဆုံး website ကို အင်တာနက်ပေါ် တင်ပြီး https link ရယူပါ။';
+      return;
+    }
+    const url = customShareUrl;
+    const text = 'မင်းအတွက် Surprise လေးတစ်ခုရှိတယ် 💗 ဖွင့်ကြည့်ပေးနော်';
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text), '_blank');
+  }
+  async function copyLink() {
+    if (location.protocol === 'file:') {
+      document.getElementById('share-answer').textContent = 'အရင်ဆုံး website ကို အင်တာနက်ပေါ် တင်ပြီး https link ရယူပါ။';
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(customShareUrl);
+      document.getElementById('share-answer').textContent = 'Link ကူးပြီးပါပြီ။ Telegram chat ထဲမှာ paste လုပ်ပို့နိုင်ပါပြီ 💗';
+    } catch (e) {
+      document.getElementById('share-answer').textContent = 'ဒီ browser မှာ အလိုအလျောက်ကူးမရပါ။ Address bar က link ကို ဖိထားပြီး Copy လုပ်ပါ။';
+    }
+  }
+  loadSharedMessage();
+  const heartBox = document.getElementById('hearts');
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('span');
+    h.className = 'heart'; h.textContent = ['♥','♡','❤'][i % 3];
+    h.style.left = (Math.random() * 100) + '%';
+    h.style.fontSize = (13 + Math.random() * 20) + 'px';
+    h.style.animationDuration = (9 + Math.random() * 12) + 's';
+    h.style.animationDelay = (-Math.random() * 18) + 's';
+    heartBox.appendChild(h);
+  }
+</script>
+</body>
+</html>
